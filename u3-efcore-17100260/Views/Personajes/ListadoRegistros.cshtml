@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Personaje>
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["AlertMessage"]
+    </div>
+}
+
+<h3>Listado de Personajes</h3>
+<div class="row">
+    <div>
+        <a asp-action="AgregarRegistro" class="btn btn-primary" style="margin:0 10px 0 0;">Agregar Personaje</a>
+    </div>
+    <div>
+        <a asp-action="CargarRegistros" class="btn btn-primary">Cargar Registros</a>
+    </div>
+</div>
+
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Anime</th>
+        <th>Acciones</th>
+    </tr>
+    @foreach (var personaje in Model)
+    {
+        <tr>
+            <td>@personaje.IdPersonaje</td>
+            <td>@personaje.Nombre</td>
+            <td>@personaje.IdAnimeNavigation.Nombre</td>
+            <td>
+                <a asp-action="EditarRegistro" asp-route-id="@personaje.IdPersonaje"><i class="glyphicon glyphicon-pencil"></i></a> |
+                <a asp-action="VerRegistro" asp-route-id="@personaje.IdPersonaje"><i class="glyphicon glyphicon-eye-open"></i></a> |
+                <a asp-action="EliminarRegistro" asp-route-id="@personaje.IdPersonaje"><i class="glyphicon glyphicon-remove"></i></a>
+            </td>
+        </tr>
+    }
+</table>

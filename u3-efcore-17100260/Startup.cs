@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using u3_efcore_17100260.Models;
+
 
 namespace u3_efcore_17100260
 {
@@ -24,6 +27,10 @@ namespace u3_efcore_17100260
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<CaricaturasContext>(opts => {
+                opts.UseSqlServer(
+                Configuration["ConnectionStrings:ExamenU3Connection"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,7 +38,7 @@ namespace u3_efcore_17100260
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();                
             }
             else
             {
@@ -50,7 +57,7 @@ namespace u3_efcore_17100260
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=PersonajesController}/{action=ListadoRegistros}/{id?}");
             });
         }
     }

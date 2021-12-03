@@ -1,0 +1,28 @@
+﻿@model u3_efcore_17100260.Models.Personaje
+
+@if (TempData["AlertMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["AlertMessage"]
+    </div>
+}
+
+<h3>Datos del Registro</h3>
+<br />
+<div>
+    <a asp-action="ListadoRegistros" class="btn btn-primary">Volver al listado</a>
+</div>
+
+<br />
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Anime</th>
+    </tr>
+    <tr>
+        <td>@Model.IdPersonaje</td>
+        <td>@Model.Nombre</td>
+        <td>@Model.IdAnime</td>
+    </tr>
+</table>
